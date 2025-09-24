@@ -20,8 +20,33 @@
 
             //PrintResult(result, num1, num2, operatioSymbol);
 
+            Tuloksentulos(operation, number1, number2, result);
+
         }
 
+        private static void Tuloksentulos(int operation, double number1, double number2, double result)
+        {
+            string symbol = "";
+
+            if (operation == 1)
+            {
+                symbol = "+";
+            }
+            else if (operation == 2)
+            {
+                symbol = "-";
+            }
+            else if (operation == 3)
+            {
+                symbol = "*";
+            }
+            else if (operation == 4)
+            {
+                symbol = "/";
+            }
+
+            Console.WriteLine($"Tulos: {number1} {symbol} {number2} = {result}");
+        }
 
         static double laske(double number1, double number2, int operation)
         {
@@ -48,10 +73,15 @@
                 else
                 {
                     tulos = number1 / number2;
+
                 }
             }
             return tulos;
         }
+
+
+
+
 
 
         static int AskOperation()
@@ -69,7 +99,9 @@
                 string valinta = Console.ReadLine();
 
                 //Tämä varmistaa, että syöte ei ole tyhjä sekä, että syöte on numero
-                if (string.IsNullOrEmpty(valinta) && !int.TryParse(valinta, out operation))
+                bool conversionOk = int.TryParse(valinta, out operation);
+
+                if (string.IsNullOrEmpty(valinta) && conversionOk == false)
                 {
                     Console.WriteLine("Virheellinen syöte. Syötä numero:");
                     valinta = Console.ReadLine();
@@ -83,7 +115,7 @@
             return operation;
         }
 
-        static double AskNumber() ///ksysytään y
+        static double AskNumber() ///kysytään y
         {
             string y = Console.ReadLine();
             double number = 0;
